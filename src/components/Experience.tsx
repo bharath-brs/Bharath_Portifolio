@@ -1,178 +1,136 @@
-import { Briefcase, GraduationCap, Award } from 'lucide-react';
-
 const experiences = [
   {
-    company: 'ZL Technologies',
     role: 'Member of Technical Staff',
+    company: 'ZL Technologies',
     period: 'July 2023 – Feb 2026',
-    type: 'work',
     highlights: [
-      'Led production incident management ensuring 99.9%+ uptime for enterprise applications',
-      'Investigated L2/L3 escalations via Splunk log correlation, reducing MTTR by 30–40% and recurring incidents by ~25%',
-      'Managed P1/P2 incidents by leading bridge calls and coordinating cross-functional restoration teams',
-      'Provided real-time stakeholder communication with impact summaries, progress updates, and ETAs during outages',
-      'Conducted Root Cause Analysis (RCA) and implemented permanent fixes for problem management',
-      'Supported CAB change management with release validation and risk-controlled deployments',
-      'Performed threat validation and alert triage, tuning detection workflows to reduce false positives',
-      'Participated in Disaster Recovery (DR) drills, validating failover readiness and RTO/RPO targets',
+      'Led production incident management for enterprise applications, ensuring 99.9%+ uptime of critical systems.',
+      'Investigated L2/L3 escalations using Splunk log correlation across application, infrastructure, and network layers, reducing MTTR by 30-40% and recurring incidents by ~25%.',
+      'Managed P1/P2 incidents, leading bridge calls and coordinating cross-functional teams to restore services with minimal business impact.',
+      'Provided real-time stakeholder communication, sharing incident impact, progress updates, and ETAs during critical outages.',
+      'Conducted Root Cause Analysis (RCA) and implemented permanent fixes, contributing to problem management and recurrence prevention.',
+      'Supported change management (CAB) activities, validating releases and ensuring risk-controlled deployments.',
+      'Performed threat validation and alert triage, tuning detection workflows and reducing false positives.',
+      'Used Splunk for centralized monitoring and anomaly detection, aligned with ISO 27001 logging practices (A.12.4).',
+      'Supported security incident handling aligned with ISO 27001 A.16, ensuring structured response and documentation.',
+      'Participated in Disaster Recovery (DR) drills, validating failover readiness and RTO/RPO targets.',
     ],
-    tags: ['Splunk', 'P1/P2 Incidents', 'RCA', 'CAB', 'ISO 27001', 'DR Drills'],
+    tags: ['Incident Management', 'Splunk', 'RCA', 'CAB', 'ISO 27001', 'DR Drills'],
   },
   {
+    role: 'Associate (DevOps & Tech Support)',
     company: 'Social Tek',
-    role: 'Associate – DevOps & Tech Support',
-    period: 'May 2021 – April 2023',
-    type: 'work',
+    period: 'September 2021 – April 2023',
     highlights: [
-      'Managed production incidents and service requests ensuring timely resolution and system availability',
-      'Performed log-based troubleshooting using Splunk, identifying root causes and escalating critical issues',
-      'Developed Python scripts to automate log analysis, reducing manual effort by ~40%',
-      'Monitored application behaviour using Splunk dashboards and alerts to detect early failure signals',
-      'Supported deployment and monitoring of applications using Docker and AWS ECS',
-      'Contributed to knowledge base documentation, improving team resolution efficiency',
+      'Managed production incidents and service requests, ensuring timely resolution and system availability.',
+      'Performed log-based troubleshooting using Splunk and system logs, identifying root causes and escalating critical issues.',
+      'Developed Python scripts to automate log analysis, reducing manual effort by ~40%.',
+      'Used Splunk dashboards and alerts to monitor application behaviour and detect early signs of failure.',
+      'Collaborated with cross-functional teams to resolve issues and improve system reliability.',
+      'Contributed to knowledge base documentation, improving resolution efficiency.',
+      'Supported deployment and monitoring of applications using Docker and AWS ECS, contributing to improved uptime.',
+      'Assisted in post-deployment validation and change verification, ensuring stable releases.',
     ],
-    tags: ['Python Automation', 'Docker', 'AWS ECS', 'Splunk', 'DevOps'],
+    tags: ['Splunk', 'Python Automation', 'Docker', 'AWS ECS', 'Monitoring'],
   },
   {
+    role: 'Analyst (L1 Support)',
     company: 'HCL Technologies',
-    role: 'Analyst – L1 Support',
     period: 'January 2020 – November 2020',
-    type: 'work',
     highlights: [
-      'Resolved user-reported issues within SLA timelines, ensuring consistent service delivery',
-      'Performed initial incident triage and escalation, reducing workload on L2/L3 teams',
-      'Managed incidents using ServiceNow with proper categorization, prioritization, and tracking',
-      'Documented known issues and solutions to improve resolution speed and team consistency',
+      'Resolved user-reported issues within SLA timelines, ensuring consistent service delivery.',
+      'Performed initial incident triage and escalation, reducing workload on L2/L3 teams.',
+      'Managed incidents using ServiceNow, ensuring proper categorization, prioritization, and tracking.',
+      'Documented known issues and solutions to improve resolution speed and consistency.',
     ],
-    tags: ['ServiceNow', 'SLA Management', 'L1 Support', 'ITIL'],
+    tags: ['ServiceNow', 'L1 Support', 'Incident Triage', 'SLA'],
   },
 ];
 
 const education = [
-  {
-    institution: 'Adikavi Nannaya University',
-    degree: 'Bachelor of Computer Applications (BCA)',
-    period: '2019',
-    detail: 'CGPA: 6.2',
-  },
-  {
-    institution: 'Geetanjali Junior College',
-    degree: 'Intermediate (MPC)',
-    period: '2016',
-    detail: '76.5%',
-  },
+  { institution: 'Adikavi Nannaya University', degree: 'Bachelor of Computer Applications (BCA)', period: '2019', detail: 'CGPA: 6.2' },
+  { institution: 'Geetanjali Junior College', degree: 'Intermediate (MPC)', period: '2016', detail: '76.5%' },
+  { institution: 'Pragati High School', degree: 'SSC', period: '2014', detail: 'CGPA: 8.8' },
 ];
 
 const certifications = [
   { name: 'Python Programming', issuer: 'Udemy', status: 'Completed' },
   { name: 'SQL for Data Analysis', issuer: 'CareerNinja', status: 'Completed' },
   { name: 'Postman Student Expert', issuer: 'Postman', status: 'Completed' },
+  { name: 'ISO 27001 Lead Implementer', issuer: '—', status: 'In Progress' },
   { name: 'Gen AI', issuer: 'UpGrad', status: 'Completed' },
-  { name: 'ISO 27001 Lead Implementer', issuer: 'In-Progress', status: 'In Progress' },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 bg-slate-900">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-16 text-center">
-          <p className="text-teal-400 font-mono text-sm tracking-widest mb-2">MY JOURNEY</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Experience</h2>
-          <div className="mt-4 w-16 h-0.5 bg-teal-400 mx-auto" />
+    <section id="experience">
+      <div className="section-header">
+        <span className="section-label">Career & Education</span>
+        <h2 className="section-title">Professional <span>journey</span></h2>
+        <p className="section-subtitle">
+          From L1 support to leading mission-critical incident response — a trajectory of growing responsibility and impact.
+        </p>
+      </div>
+
+      <div className="exp-layout">
+        <div className="timeline">
+          {experiences.map((exp, idx) => (
+            <div className="timeline-item" key={idx}>
+              <div className="timeline-marker">
+                <div className="marker-dot" />
+                {idx < experiences.length - 1 && <div className="marker-line" />}
+              </div>
+              <div className="timeline-card">
+                <div className="timeline-top">
+                  <h3>{exp.role}</h3>
+                  <span className="timeline-period">{exp.period}</span>
+                </div>
+                <span className="timeline-company">{exp.company}</span>
+                <ul className="timeline-highlights">
+                  {exp.highlights.map((h, i) => (
+                    <li key={i}>{h}</li>
+                  ))}
+                </ul>
+                <div className="timeline-tags">
+                  {exp.tags.map((t) => (
+                    <span key={t}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-10">
-          <div className="lg:col-span-2 space-y-8">
-            <div className="flex items-center gap-3 mb-6">
-              <Briefcase size={18} className="text-teal-400" />
-              <h3 className="text-white font-semibold text-lg">Work History</h3>
-            </div>
-
-            <div className="relative">
-              <div className="absolute left-4 top-0 bottom-0 w-px bg-slate-700" />
-
-              <div className="space-y-8">
-                {experiences.map((exp, i) => (
-                  <div key={i} className="relative pl-12">
-                    <div className="absolute left-0 top-1 w-8 h-8 bg-slate-950 border-2 border-teal-400 rounded-full flex items-center justify-center">
-                      <div className="w-2 h-2 bg-teal-400 rounded-full" />
-                    </div>
-
-                    <div className="bg-slate-800/60 border border-slate-700 rounded-xl p-6 hover:border-teal-400/40 transition-all duration-300">
-                      <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-                        <div>
-                          <h4 className="text-white font-bold text-lg">{exp.role}</h4>
-                          <p className="text-teal-400 font-semibold">{exp.company}</p>
-                        </div>
-                        <span className="text-slate-400 text-sm bg-slate-700/50 px-3 py-1 rounded-full whitespace-nowrap">
-                          {exp.period}
-                        </span>
-                      </div>
-
-                      <ul className="space-y-2 mb-4">
-                        {exp.highlights.map((h, j) => (
-                          <li key={j} className="flex gap-2 text-slate-400 text-sm leading-relaxed">
-                            <span className="text-teal-400 mt-1.5 flex-shrink-0">▸</span>
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-
-                      <div className="flex flex-wrap gap-2">
-                        {exp.tags.map((tag) => (
-                          <span key={tag} className="px-2.5 py-1 text-xs bg-teal-400/10 text-teal-400 border border-teal-400/20 rounded">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+        <aside className="exp-sidebar">
+          <div className="sidebar-card">
+            <h3>Education</h3>
+            {education.map((e) => (
+              <div className="edu-item" key={e.institution}>
+                <div className="edu-top">
+                  <span className="edu-degree">{e.degree}</span>
+                  <span className="edu-period">{e.period}</span>
+                </div>
+                <span className="edu-institution">{e.institution}</span>
+                <span className="edu-detail">{e.detail}</span>
               </div>
-            </div>
+            ))}
           </div>
 
-          <div className="space-y-8">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <GraduationCap size={18} className="text-teal-400" />
-                <h3 className="text-white font-semibold text-lg">Education</h3>
+          <div className="sidebar-card">
+            <h3>Certifications</h3>
+            {certifications.map((c) => (
+              <div className="cert-item" key={c.name}>
+                <div>
+                  <span className="cert-name">{c.name}</span>
+                  <span className="cert-issuer">{c.issuer}</span>
+                </div>
+                <span className={`cert-status ${c.status === 'Completed' ? 'done' : 'progress'}`}>
+                  {c.status}
+                </span>
               </div>
-              <div className="space-y-4">
-                {education.map((edu, i) => (
-                  <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-xl p-5 hover:border-teal-400/30 transition-colors">
-                    <p className="text-white font-semibold text-sm">{edu.degree}</p>
-                    <p className="text-teal-400 text-sm mt-1">{edu.institution}</p>
-                    <div className="flex justify-between mt-2">
-                      <span className="text-slate-500 text-xs">{edu.detail}</span>
-                      <span className="text-slate-500 text-xs">{edu.period}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <Award size={18} className="text-teal-400" />
-                <h3 className="text-white font-semibold text-lg">Certifications</h3>
-              </div>
-              <div className="space-y-3">
-                {certifications.map((cert, i) => (
-                  <div key={i} className="bg-slate-800/60 border border-slate-700 rounded-xl p-4 hover:border-teal-400/30 transition-colors flex items-center justify-between">
-                    <div>
-                      <p className="text-white text-sm font-medium">{cert.name}</p>
-                      <p className="text-slate-500 text-xs mt-0.5">{cert.issuer}</p>
-                    </div>
-                    <span className={`text-xs px-2 py-1 rounded-full ${cert.status === 'In Progress' ? 'bg-amber-400/10 text-amber-400 border border-amber-400/20' : 'bg-teal-400/10 text-teal-400 border border-teal-400/20'}`}>
-                      {cert.status}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
-        </div>
+        </aside>
       </div>
     </section>
   );

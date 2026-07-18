@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, Linkedin, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, Linkedin, MapPin, Send, CircleCheck as CheckCircle } from 'lucide-react';
 
 const contactInfo = [
   {
@@ -17,8 +17,8 @@ const contactInfo = [
   {
     icon: <Linkedin size={20} />,
     label: 'LinkedIn',
-    value: '/in/dev-bharath',
-    href: 'https://www.linkedin.com/in/dev-bharath',
+    value: '/in/bharath',
+    href: 'https://www.linkedin.com/in/bharath',
   },
   {
     icon: <MapPin size={20} />,
@@ -29,147 +29,84 @@ const contactInfo = [
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [sent, setSent] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const mailto = `mailto:kadimcherlabharat@outlook.com?subject=${encodeURIComponent(form.subject || 'Portfolio Contact')}&body=${encodeURIComponent(`From: ${form.name} (${form.email})\n\n${form.message}`)}`;
-    window.location.href = mailto;
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const name = data.get('name');
+    const email = data.get('email');
+    const message = data.get('message');
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(`${message}\n\nFrom: ${name} (${email})`);
+    window.location.href = `mailto:kadimcherlabharat@outlook.com?subject=${subject}&body=${body}`;
+    setSent(true);
+    form.reset();
+    setTimeout(() => setSent(false), 4000);
   };
 
   return (
-    <section id="contact" className="py-24 bg-slate-900">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-16 text-center">
-          <p className="text-teal-400 font-mono text-sm tracking-widest mb-2">LET'S CONNECT</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Get In Touch</h2>
-          <div className="mt-4 w-16 h-0.5 bg-teal-400 mx-auto" />
-          <p className="text-slate-400 mt-6 max-w-lg mx-auto">
-            Open to new opportunities, collaborations, or just a conversation about production reliability and incident management.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-white font-bold text-xl mb-2">Let's work together</h3>
-              <p className="text-slate-400 leading-relaxed">
-                Whether you need an experienced Application Support Engineer, incident management leadership, or someone to own your production reliability — I'd love to hear from you.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {contactInfo.map((item) => (
-                <div key={item.label} className="flex items-center gap-4 p-4 bg-slate-800/60 border border-slate-700 rounded-xl hover:border-teal-400/40 transition-colors group">
-                  <div className="w-10 h-10 bg-teal-400/10 rounded-lg flex items-center justify-center text-teal-400 flex-shrink-0 group-hover:bg-teal-400/20 transition-colors">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <p className="text-slate-500 text-xs mb-0.5">{item.label}</p>
-                    {item.href ? (
-                      <a href={item.href} className="text-slate-200 hover:text-teal-400 transition-colors text-sm font-medium">
-                        {item.value}
-                      </a>
-                    ) : (
-                      <p className="text-slate-200 text-sm font-medium">{item.value}</p>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-slate-800/40 border border-slate-700 rounded-xl p-6">
-              <p className="text-slate-400 text-sm leading-relaxed">
-                Currently <span className="text-teal-400 font-semibold">open to opportunities</span> in Application Support, Site Reliability Engineering, or Security Operations roles.
-              </p>
-            </div>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-slate-400 text-sm mb-1.5">Your Name</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="John Doe"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-400 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-slate-400 text-sm mb-1.5">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="john@company.com"
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-400 transition-colors"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-slate-400 text-sm mb-1.5">Subject</label>
-              <input
-                type="text"
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
-                placeholder="Job Opportunity / Collaboration"
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-400 transition-colors"
-              />
-            </div>
-            <div>
-              <label className="block text-slate-400 text-sm mb-1.5">Message</label>
-              <textarea
-                name="message"
-                required
-                value={form.message}
-                onChange={handleChange}
-                rows={6}
-                placeholder="Tell me about the opportunity or how I can help..."
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-teal-400 transition-colors resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-teal-500 hover:bg-teal-400 text-slate-900 font-semibold py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-teal-500/25"
-            >
-              {submitted ? (
-                <>
-                  <CheckCircle size={18} />
-                  Message Sent!
-                </>
-              ) : (
-                <>
-                  <Send size={18} />
-                  Send Message
-                </>
-              )}
-            </button>
-          </form>
-        </div>
+    <section id="contact">
+      <div className="section-header">
+        <span className="section-label">Get In Touch</span>
+        <h2 className="section-title">Let's build <span>reliable systems</span> together</h2>
+        <p className="section-subtitle">
+          Whether it's incident response, reliability engineering, or a new opportunity — I'm always open to a conversation.
+        </p>
       </div>
 
-      <footer className="max-w-6xl mx-auto px-6 mt-20 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-slate-500 text-sm">
-          © 2026 Bharath Kadimcherla. All rights reserved.
-        </p>
-        <p className="text-slate-600 text-sm">
-          Built with React & Tailwind CSS
-        </p>
-      </footer>
+      <div className="contact-grid">
+        <div className="contact-info">
+          {contactInfo.map((item) => (
+            <a
+              className="contact-card"
+              key={item.label}
+              href={item.href ?? undefined}
+              target={item.href?.startsWith('http') ? '_blank' : undefined}
+              rel={item.href?.startsWith('http') ? 'noreferrer' : undefined}
+            >
+              <div className="contact-icon">{item.icon}</div>
+              <div>
+                <span className="contact-label">{item.label}</span>
+                <span className="contact-value">{item.value}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <form className="contact-form" onSubmit={handleSubmit}>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="name">Name</label>
+              <input id="name" name="name" type="text" required placeholder="Your name" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="you@example.com" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="subject">Subject</label>
+            <input id="subject" name="subject" type="text" placeholder="What's this about?" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="message">Message</label>
+            <textarea id="message" name="message" rows={5} required placeholder="Your message..." />
+          </div>
+          <button type="submit" className={`form-submit ${sent ? 'sent' : ''}`}>
+            {sent ? (
+              <>
+                <CheckCircle size={18} /> Message Sent
+              </>
+            ) : (
+              <>
+                Send Message <Send size={18} />
+              </>
+            )}
+          </button>
+        </form>
+      </div>
     </section>
   );
 }
