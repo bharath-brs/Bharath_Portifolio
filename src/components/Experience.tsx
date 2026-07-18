@@ -21,7 +21,7 @@ const experiences = [
   {
     company: 'Social Tek',
     role: 'Associate – DevOps & Tech Support',
-    period: 'September 2021 – April 2023',
+    period: 'May 2021 – April 2023',
     type: 'work',
     highlights: [
       'Managed production incidents and service requests ensuring timely resolution and system availability',
@@ -60,12 +60,6 @@ const education = [
     degree: 'Intermediate (MPC)',
     period: '2016',
     detail: '76.5%',
-  },
-  {
-    institution: 'Pragati High School',
-    degree: 'SSC',
-    period: '2014',
-    detail: 'CGPA: 8.8',
   },
 ];
 

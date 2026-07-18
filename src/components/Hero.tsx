@@ -101,7 +101,7 @@ export default function Hero() {
         <div className="flex items-center justify-center gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '1.2s', animationFillMode: 'forwards' }}>
           {[
             { icon: <Mail size={18} />, href: 'mailto:kadimcherlabharat@outlook.com', label: 'Email' },
-            { icon: <Linkedin size={18} />, href: 'https://www.linkedin.com/in/bharath', label: 'LinkedIn' },
+            { icon: <Linkedin size={18} />, href: 'https://www.linkedin.com/in/dev-bharath', label: 'LinkedIn' },
             { icon: <Phone size={18} />, href: 'tel:+918501888785', label: 'Phone' },
             { icon: <Github size={18} />, href: 'https://github.com/bharath-brs', label: 'GitHub' },
           ].map((item) => (
