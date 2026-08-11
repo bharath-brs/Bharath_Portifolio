@@ -59,7 +59,7 @@ const certifications = [
   { name: 'Postman Student Expert', issuer: 'Postman', status: 'Completed' },
   { name: 'ISO 27001 Lead Implementer', issuer: '—', status: 'In Progress' },
   { name: 'Gen AI', issuer: 'UpGrad', status: 'Completed' },
-  { name: 'Clauder Certified Foundations', issuer: 'Claude', status: 'In Progress' },
+  { name: 'Claude Certified Architect - Foundations', issuer: 'Anthropic', status: 'In Progress' },
 ];
 
 export default function Experience() {
