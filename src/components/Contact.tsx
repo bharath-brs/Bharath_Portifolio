@@ -17,8 +17,8 @@ const contactInfo = [
   {
     icon: <Linkedin size={20} />,
     label: 'LinkedIn',
-    value: '/in/bharath',
-    href: 'https://www.linkedin.com/in/bharath',
+    value: '/in/dev-bharath',
+    href: 'https://www.linkedin.com/in/dev-bharath/',
   },
   {
     icon: <MapPin size={20} />,

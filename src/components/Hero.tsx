@@ -75,7 +75,7 @@ export default function Hero() {
           <a href="mailto:kadimcherlabharat@outlook.com" aria-label="Email">
             <Mail size={18} />
           </a>
-          <a href="https://www.linkedin.com/in/bharath" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/dev-bharath/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <Linkedin size={18} />
           </a>
           <a href="tel:+918501888785" aria-label="Phone">
