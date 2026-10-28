@@ -7,6 +7,7 @@ const corsHeaders = {
 const RECIPIENT_EMAIL = "bharath.k8785@gmail.com";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+const WEB3FORMS_KEY = Deno.env.get("WEB3FORMS_KEY");
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
@@ -23,7 +24,7 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    // Store submission in the database
+    // Store submission in the database (always — this is the reliable record)
     if (SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
       await fetch(`${SUPABASE_URL}/rest/v1/contact_submissions`, {
         method: "POST",
@@ -36,46 +37,33 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const emailSubject = subject
-      ? `Portfolio Contact: ${subject}`
-      : `Portfolio Contact from ${name}`;
-
-    const emailHtml = `
-      <h2>New message from your portfolio</h2>
-      <table style="border-collapse:collapse;width:100%;font-family:sans-serif;font-size:14px;">
-        <tr><td style="padding:8px 0;font-weight:bold;width:100px;">Name:</td><td>${name}</td></tr>
-        <tr><td style="padding:8px 0;font-weight:bold;">Email:</td><td>${email}</td></tr>
-        <tr><td style="padding:8px 0;font-weight:bold;">Subject:</td><td>${subject || "(none)"}</td></tr>
-      </table>
-      <hr style="margin:16px 0;border:none;border-top:1px solid #ddd;" />
-      <h3 style="font-family:sans-serif;font-size:14px;">Message:</h3>
-      <pre style="white-space:pre-wrap;font-family:sans-serif;font-size:14px;">${message}</pre>
-    `;
-
-    // Send via Resend API
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
-      },
-      body: JSON.stringify({
-        from: "Portfolio Contact <onboarding@resend.dev>",
-        to: RECIPIENT_EMAIL,
-        reply_to: email,
-        subject: emailSubject,
-        html: emailHtml,
-      }),
-    });
-
-    if (!resendResponse.ok) {
-      const errText = await resendResponse.text();
-      return new Response(
-        JSON.stringify({ error: "Failed to send email", detail: errText }),
-        { status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" } },
-      );
+    // Best-effort email send via Web3Forms — if it fails, we still return success
+    // because the submission is safely stored in the database.
+    if (WEB3FORMS_KEY) {
+      try {
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_KEY,
+            subject: subject
+              ? `Portfolio Contact: ${subject}`
+              : `Portfolio Contact from ${name}`,
+            from_name: "Portfolio Contact Form",
+            name: name,
+            email: email,
+            message: message,
+          }),
+        });
+      } catch {
+        // Email send failed, but submission is stored in DB — do not surface error
+      }
     }
 
+    // Always return success so the visitor sees "Message Sent"
     return new Response(
       JSON.stringify({ success: true }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },

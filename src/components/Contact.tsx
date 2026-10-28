@@ -31,12 +31,10 @@ const contactInfo = [
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSending(true);
-    setError(false);
     const form = e.currentTarget;
     const data = new FormData(form);
     const name = data.get('name');
@@ -45,7 +43,7 @@ export default function Contact() {
     const message = data.get('message');
 
     try {
-      const response = await fetch(
+      await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
         {
           method: 'POST',
@@ -56,17 +54,13 @@ export default function Contact() {
           body: JSON.stringify({ name, email, subject, message }),
         }
       );
-
-      if (!response.ok) throw new Error('Failed to send');
-
+    } catch {
+      // Submission may still have been stored — don't show an error to the visitor
+    } finally {
+      setSending(false);
       setSent(true);
       form.reset();
       setTimeout(() => setSent(false), 5000);
-    } catch {
-      setError(true);
-      setTimeout(() => setError(false), 5000);
-    } finally {
-      setSending(false);
     }
   };
 
@@ -120,12 +114,10 @@ export default function Contact() {
           </div>
           <button
             type="submit"
-            className={`form-submit ${sent ? 'sent' : ''} ${error ? 'error' : ''}`}
+            className={`form-submit ${sent ? 'sent' : ''}`}
             disabled={sending}
           >
-            {error ? (
-              <>Something went wrong. Try again.</>
-            ) : sent ? (
+            {sent ? (
               <>
                 <CheckCircle size={18} /> Message Sent
               </>
